@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	한글	<br>
+	
+	<a href="fisa.jsp">jsp로 이동</a> <br>
+	
+	<!-- 버튼 클릭시 ce 라는 url매핑 servlet 호출  -->
+	<!-- http://localhost/step01_baisc/index.html -->
+	<!-- http://localhost/step01_baisc/ce -->
+	<button onclick="location.href='ce'">servlet으로 이동</button>
+	<br>
+	
+	<!-- form이라는 tag내의 submit버튼 방식으로 이동
+		client가 server에 입력 데이터 전송시 주로 
+		사용하는 방식
+		
+		action="ce"로 설정시
+		http://ip:port/context명/ce 요청으로 인지
+	 -->
+	<form action="ce">  <!-- doGet() call -->
+		id : <input type="text" name="id"><br>
+		pw : <input type="password" name="pw"><br>
+		
+		<input type="submit" value="1. 서버에 데이터전송">				
+	</form>
+	<hr>
+	<form action="ce" method="get">  <!-- doGet() call -->
+		<input type="submit" value="2. 서버에 데이터전송">				
+	</form>
+	<hr>
+	
+	<form action="ce" method="post">  <!-- doPost() call -->
+		id : <input type="text" name="id"><br>
+		pw : <input type="password" name="pw"><br>
+		
+		<input type="submit" value="3. 서버에 데이터전송">				
+	</form>
+	<hr>
+	
+	
+</body>
+</html>
+
+<!-- 
+	http://localhost:8080/step01_baisc/index.html
+	
+	- server.xml http 통신 port 설정값을 80으로 변경
+	http://localhost:80/step01_baisc/index.html
+	http://localhost/step01_baisc/index.html
+	
+* get 방식과 post 방식의 차이 url로 이해하기
+	- id, pw라는 별칭으로 데이터 서버에 전송
+	- get방식: web query string을 url에 오픈된 상태로 서버에 전송
+	http://localhost/step01_basic/ce?id=ads&pw=dsad
+	
+	- post방식: web query string은 은닉된 상태로 서버에 전송
+	http://localhost/step01_basic/ce
+ -->
+ 
+ 
+ 
+ 
+ 

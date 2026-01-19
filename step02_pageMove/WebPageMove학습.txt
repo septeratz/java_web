@@ -1,0 +1,60 @@
+WebPageMove학습.txt
+
+1. 실습 구조
+	index.html -> Step01Page.java -> Step02Page.java
+	
+2. 실습 단계
+	1단계
+	index.html (링크)
+		-> Step01Page.java (링크, client에게 보이도록 출력)
+			-> Step02Page.java
+	
+	* url 변천사
+	http://localhost/step02_pageMove/index.html
+	http://localhost/step02_pageMove/one
+	http://localhost/step02_pageMove/two
+	
+	*method 요청 방식
+	Step01Page doGet()
+	Step02Page doGet()
+	
+----
+	
+	2단계 - Servlet API를 통한 이동 방식(forward)
+			Step01Page -> Step02Page로 이동 시 forward
+	index.html (링크)
+		-> Step01Page.java (client 작업없이 이동, forwarding 방식)
+			-> Step02Page.java
+			
+	
+	* url 변천사
+	http://localhost/step02_pageMove/index.html
+	http://localhost/step02_pageMove/one
+	
+	* method 요청 방식
+	Step01Page doGet()
+	two로 이동 전
+	Step02Page doGet()
+	two로 이동 후
+	
+	3단계 - Servlet API를 통한 이동 방식(redirect)
+			Step01Page -> Step02Page로 이동 시 redirect
+	index.html (링크)
+		-> Step01Page.java (client 작업없이 이동, redirect 방식)
+			-> Step02Page.java
+			
+	* url 변천사
+	http://localhost/step02_pageMove/index.html
+	http://localhost/step02_pageMove/two
+	
+	* method 요청 방식
+	Step01Page doGet()
+	two로 이동 전
+	two로 이동 후
+	Step02Page doGet()
+	
+	
+3. 요청 url
+http://ip:port/step02_pageMove/index.html
+http://ip:port/step02_pageMove/one
+http://ip:port/step02_pageMove/two

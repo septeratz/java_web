@@ -1,23 +1,42 @@
-# Compiled class file
+# ----------------------
+# Eclipse IDE Specific
+# ----------------------
+# The workspace metadata folder (contains your local preferences/layout)
+.metadata/
+
+# Compiled class files (Eclipse usually puts them here by default)
+bin/
+build/
+
+# Eclipse settings folder (contains local project settings)
+.settings/
+
+# Eclipse Core Project files
+# NOTE: If you want to share the project configuration with others,
+# remove the next two lines. If you only want to save the source code (.java), keep them.
+.classpath
+.project
+
+# Local Server configuration (Tomcat setup inside Eclipse)
+Servers/
+
+# ----------------------
+# Java & Web Build Output
+# ----------------------
+# Compiled Java classes
 *.class
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
+# Packaged archives (you usually don't want to commit the final build)
 *.war
-*.nar
+*.jar
 *.ear
-*.zip
-*.tar.gz
-*.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# ----------------------
+# OS Junk Files
+# ----------------------
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
