@@ -1,0 +1,25 @@
+client의 접속 상태 유지 기술
+
+1. 실습 구조
+	html: id/pw 입력
+	-> Servlet: id/pw 유효성 검증, 유효한 경우 이름 저장
+		-> 유효한 경우 SuccessViewServlet.java 환영인사(id값, 이름값 출력)
+		-> 무효한 경우 FailViewServlet.java 재시도 유도
+	
+	html -> A servlet -> B servlet
+	html에 id/pw 입력
+	A servlet에서 어떤 API로 id/pw 획득
+		: HttpServletRequest, String getParameter("별칭")
+		: 이름값은 db로부터 검색한 새로운 데이터를 요청객체에 저장. setAttribute("별칭", 이름)
+		: 요청 객체를 유지해야 하는 필수 기술 반영. 따라서 web page 이동시 forward로 이동
+			request.getRequestDispatcher("이동페이지지정")
+	B server id값도 출력, 이름 출력
+		: id값- getParameter("id별칭")
+		: 이름- getAttribute("별칭")
+		
+	SpringBoot
+		ModelAndView
+		- Model: 데이터(HttpServletRequest, 요청 객체에 저장되는 원리)
+		- View: 이동 화면 정보
+		- return ModelAndView (객체 반환이 화면 이동)
+			: forward 방식
