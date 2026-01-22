@@ -37,7 +37,7 @@ public class DeptController extends HttpServlet {
 				ArrayList<DeptDTO> depts = DeptDAO.deptAll();
 				if(depts.size() != 0) {
 					request.setAttribute("depts", depts); 
-					request.getRequestDispatcher("../deptallview.jsp").forward(request, response);
+					request.getRequestDispatcher("../deptallviewfinal.jsp").forward(request, response);
 				}else {
 					//EmptyData.java
 				}
