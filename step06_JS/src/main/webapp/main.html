@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- 버튼 클릭 시 jsp에 요청, 응답 후 응답 데이터는 버튼 위에 출력 -->
+	<div id='dataView'></div>	
+	<button onclick="reqRes()"'>데이터 요청</button>
+	<br>
+	새로고침을 할 경우 지워질수도 있는 영역 <br>
+	<script>
+		// 비동기용 사용자 정의 함수 개발
+		
+		function reqRes() {
+			
+			// 비동기 요청 객체 생성
+			const xhttp = new XMLHttpRequest();
+			
+			/* client의 브라우저와 서버간의 요청 시작, 응답, 완료까지의 전반적인 상태를 자동 체킹하는 속성
+				속성에 처리 함수 등록
+				function() {} : 이름없음, onreadystatechange 등록
+				실시간 상태값 변경시마다 자동 실행되게 등록
+				callback 함수 - 이름 없고, 호출 방법은 코드로는 없음, 상태 변환(이벤트)에 따라 자동 호출
+			*/
+			xhttp.onreadystatechange = function() {
+	
+				if (this.readyState == 4 && this.status == 200) {
+					
+					/*  html 문서 자체를 의미하는 내장 객체 - document
+						다양한 메소드 보유 - id값으로 해당 tag를 찾음
+						tag 종류에 따라 속성으로 tag 영역에 데이터 or UI를 반영
+
+						document.getElementById("dataView")
+						= <div id="dataView"></div>의 의미
+						
+					*/
+					document.getElementById("dataView").innerText = xhttp.responseText;
+					// console.log(xhttp.responseText);
+				}
+			};
+			xhttp.open("GET", "reqResAjaxTest.jsp");
+			
+			/* 서버에 실제 요청하는 메소드
+				1. get 방식과 post 방식에 따른 구분 필요
+				- server에 전송하는 데이터를 web query string 존재여부에 따라 다름
+				
+				2. get 방식
+				xhttp.open("GET", "reqResAjaxTest.jsp?웹쿼리");
+				xhttp.send();
+				 
+				3. post방식
+				xhttp.open("POST", "reqResAjaxTest.jsp");
+				xhttp.send("웹쿼리");
+			*/
+			xhttp.send();
+		}
+	</script>
+
+</body>
+</html>
+
+<!-- 질문
+1. 버튼은 언제 클릭되나?
+	- onclick이라는 브라우저 내부 내장된 속성이 감지
+	- html tag의 속성
+	
+2. 응답은 정말 언제 올까?
+	- 감지 기능의 속성
+	- XMLHttpRequest 내부의 속성: onreadystatechange
+		: 브라우저와 서버간의 모든 상태값(요청, 응답 진행상태 포함) 
+		변환 감지하는 속성
+		: 개발자는 속성 기능 활용, 브라우저 내부에서 자체적으로 기능 적용하는 속성
+ -->

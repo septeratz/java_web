@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+	<!--  설정 인지 및 관리는 tomcat
+		1. server가 live 해야만 사용 가능한 설정(web 상에서만 사용 가능 한 설정)
+		2. 여러개의 자원을 고유한 별칭(name)으로 설정
+	 -->
+	 
+	 <!--  oracle db -->
+	<Resource name="jdbc/myoracle" auth="Container"
+              type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver"
+              url="jdbc:oracle:thin:@127.0.0.1:1521:xe"
+              username="scott" password="tiger" maxTotal="20" maxIdle="10"
+              maxWaitMillis="-1"/>
+              
+      <!--  mysql db -->		
+      <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource"
+               maxTotal="20" maxIdle="10" maxWaitMillis="1"
+               username="user01" password="user01" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/fisa"/>
+      
+</Context>

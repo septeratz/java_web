@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>JS 학습</h3>
+    <br><hr><br>
+    <script>
+        // 변수를 함수 내부에 로컬 변수로 선언
+        function f1() {
+            no1 = 1;    // 전역 변수
+            var no2 = 2;    // 로컬 변수
+            let no3 = 3;    // 로컬 변수
+            const no4 = 4;  // 로컬 변수
+            console.log(no1, no2, no3, no4);
+        }
+        f1();
+        console.log(no1);
+        // console.log(no2); // 오류 발생
+        // console.log(no3); // 오류 발생
+        // console.log(no4); // 오류 발생
+        function f2() {
+            if(1==1) {
+                no1 = 1;    // 전역 변수
+                var no2 = 2;    // 로컬 변수
+                let no3 = 3;    // 로컬 변수
+                const no4 = 4;  // 로컬 변수
+                console.log(no1, no2, no3, no4);
+            }
+            // console.log(no1, no2, no4);
+        }
+        f2();
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js4JSON.html</title>
+</head>
+<body>
+    <h3>JSON 다루기</h3>
+    <br><hr><br>
+    <script>
+        let obj1 = {"k1":"v1", "k2":10};
+        console.log(obj1);
+
+        let obj2 = {
+                "employees":[
+                    {"firstName":"John", "lastName":"Doe"},
+                    {"firstName":"Anna", "lastName":"Smith"},
+                    {"firstName":"Peter", "lastName":"Jones"}
+                ]
+            };
+    //? Smith만 출력
+    console.log(obj2.employees[1].lastName);
+
+    //back단 서버가 응답한 포멧의 샘플 예시
+    console.log("*** step02 ***");
+    let obj3 = '{"k1":"v1", "k2":10}';
+    console.log(typeof(obj1), typeof(obj2), typeof(obj3));
+    //object object string
+
+    //json형식을 빙자한 순수 string -> json 객체로 변환
+    let obj4 = JSON.parse(obj3);
+    console.log(typeof(obj4), obj4.k2) // object
+
+    let obj5 = "{'k1':'v1', 'k2':10}"; 
+    console.log(typeof(obj5)); //string
+
+    /* 주의사항
+    json 포맷을 '' 형식으로 가공을 잘못했을 경우 해결책
+    eval() 사용으로 해결은 가능하나
+    비추, 결론: json 데이터 포맷부터 제대로 구성하는 것이 필수적
+    json 포맷: key와 value는 "" 큰따옴표 사용 필수
+    */
+    let obj6 = eval("("+obj5+")"); 
+    console.log(typeof(obj6), obj6.k1); // object v1
+
+    </script>
+    
+</body>
+</html>

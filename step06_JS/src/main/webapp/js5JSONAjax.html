@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>서버가 응답한 데이터 가공</h3>
+	<br>	<hr>	<br>
+	
+	<button onclick="reqRes()">1. json 데이터 요청</button>
+	<br>
+	<input type="text" id="inputData">
+	<button onclick="reqRes2()">2. 입력 및 가공된 데이터 응답받음</button>
+	<div id="resData"></div> <!-- 응답 데이터 출력 영역 -->
+	
+	
+	
+	
+	
+	
+	
+	<script>
+		function reqRes() {
+
+			const xhttp = new XMLHttpRequest();
+			
+			xhttp.onreadystatechange = function() {
+				
+				if (this.readyState == 4 && this.status == 200) {
+					console.log(typeof(xhttp.responseText)); // string
+					
+					// console에 이순신 이름만 출력
+					let s1 = xhttp.responseText;
+					s1 = JSON.parse(s1);
+					console.log(s1.people[1].name);
+					
+				}
+			};
+			
+			xhttp.open("GET", "reqResAjaxTest2.jsp");
+			xhttp.send();
+		}
+		
+		function reqRes2() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					let s1 = xhttp.responseText;
+					alert(s1);
+				}
+			};
+			// ajax의 get방식 처리 문법
+			// xhttp.open("GET", "reqResAjaxTest3.jsp?msg=" + document.getElementById("inputData").value);
+			// xhttp.send();
+			
+			xhttp.open("POST", "reqResAjaxTest3.jsp");
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("msg=" + document.getElementById("inputData").value);
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    
+    <h3>DOM API</h3>
+    <br><hr><br>
+
+    1. input tag 2개 / button 클릭 시 input tag 데이터값 이동<br>
+    <input type="text" id="iOne" value="초기데이터"> -    
+    <input type="text" id="iTwo">
+    <br>
+    <button id="btn1">1번 데이터 이동</button>
+
+    <script>
+        document.getElementById("btn1").addEventListener("click", myFun1);
+
+        function myFun1() {
+            document.getElementById("iTwo").value =
+                document.getElementById("iOne").value;
+
+            document.getElementById("iOne").value = "";
+            
+        }
+
+    </script>
+</body>
+</html>

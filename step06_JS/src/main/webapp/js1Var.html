@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h3>JS 학습</h3>
+    <br><hr><br>
+    <script>
+        // js 개발 영역, java 주석 표기와 동일함
+        console.log("*** 1. 선언 방식 ***");
+        name = '연아';
+        var age = 30;
+        let address = "서울";
+        const gender = '여성';
+
+        console.log(typeof(name), typeof(age), address, gender);
+        name = 10; // 문자열 데이터가 숫자 타입으로 변환됨
+        age = '재석';
+        console.log(typeof(name), typeof(age), address, gender);
+
+        no1 = 10;
+        console.log(typeof(no1)); // number
+        no1 = "fisa";
+        console.log(typeof(no1)); // string
+    </script>
+
+</body>
+</html>
