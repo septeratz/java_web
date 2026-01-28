@@ -1,0 +1,25 @@
+JPA 학습을 위한 프로젝트 환경 세팅
+
+- log 기록, jpa 표준 설정 파일 사용 필수
+- standalone application
+- eclipse 기반으로 개발 구조 셋팅
+
+1단계
+step08_JPA 일반 java 프로젝트 생성: jre 버전 등 확인 
+	-> JPA 프로젝트 생성: persistence.xml 파일 생성 여부 확인
+		-> Maven 프로젝트 생성 
+		
+2단계
+step09_JPA 일반 java 프로젝트 생성: jre 버전 등 확인
+	-> Maven 프로젝트 생성
+		-> JPA 프로젝트 생성: persistence.xml 파일 생성 여부 확인
+
+3단계
+step10_JPA 프로젝트를 Maven 프로젝트로 생성
+	-> build path jdk버전 수정
+		-> JPA 프로젝트로 변경: 생성된 파일 확인
+			-> JPA 버전 변경:
+				build path 부분에서 버전 변경
+				persistence.xml 파일을 수작업으로 직접 수정
+				2.2 버전 변경이 유효한지 스펙으로 제시되는 파일의 존재 여부 확인
+					: http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd

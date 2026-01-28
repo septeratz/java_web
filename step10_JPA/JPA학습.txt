@@ -1,0 +1,98 @@
+JPA
+
+1. 특징
+- sql 문장 없이 개발 및 RDBMS의 sql문장 생성, 실행
+- 참고
+	sql 문장: JDBC로 개발
+			MyBatis로 개발(xml, sql문장, 어노테이션 조합)
+			JPA로 개발(xml, 어노테이션 조합, sql + 어노테이션)
+			JPA를 기반으로 완전 추상화: Spring Data JPA
+
+2. 주의사항
+- sql 자체로 튜닝를 해야 하는 로직엔 JPA 사용 고려 필수
+
+3. 구조
+3-1. RDBMS의 table과 매핑되는 Entity 클래스
+	table의 컬럼 = class의 멤버 변수
+	
+3-2. entity와 dto 용도 및 개발 코드 이해하기
+	예시: 부서 정보 - 부서번호, 부서명, 지역인 경우
+		1. Entity
+			public class Dept{
+				@Id		// Primary key 의미 설정 필수
+				private int deptno;
+				private String dname;
+				private String loc;
+			}
+		2. DTO 
+			public class Dept{
+				private int deptno;
+				private String dname;
+				private String loc;
+			} 
+	
+	10개 검색되는 부서라면 부서Entity 객체도 10개 활용
+	
+	
+4. xml 설정 파일
+	<persistence-unit name="jpaPU" transaction-type="RESOURCE_LOCAL">
+		- db의 설정 정보 단위
+		- name="jpaPU" : java 소스 상에서 어떤 db와 통신할 것인지 이 이름으로 자원 지정해서 사용
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaPU");
+	
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		- 참고 : Slf4j 사용 시 log4j 구현체 필요. 같은 원리임
+		- jpa 사용 시 Hibernate 구현체 필요, 실제 내부 구동 및 관리 주체
+		
+		<class>model.entity.Member</class>
+		- table과 1:1 매핑 entity 클래스 등록 필수
+		- @Entity가 필수적으로 선언되어야 함
+		- xml 문서가 읽혀지는 순간에 table과 연동(생성 또는 유지)
+
+		<properties>
+			<!-- JDBC 설정
+				1. jdbc api 없이는 실행 불가 입증 설정
+				2. 수정 가능한 영역 value값만 수정 가능
+				3. 수정시에는 RDBMS 설정에 맞게 수정 필수
+				4. 참고: Spring data JPA는 더 추상화됨
+			
+			-->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/fisa?serverTimezone=UTC" />
+			<property name="javax.persistence.jdbc.user" value="user01" />
+			<property name="javax.persistence.jdbc.password"	value="user01" />
+
+
+
+			<!-- Hibernate
+				1. JPA는 Hibernate 기술을 조금 더 추상화시킴(쉽게 사용 가능하게 가공하여 제공함)
+				2. 참고
+					DB 자체적으로 1씩 자동 증가하는 기술이 있음
+					mysql은 auto_increment, oracle은 sequence
+					개념은 동일하나 표현법이 각각 다름
+					JPA 사용자 입장에선 표준 방식으로 사용 및 내부적으로 DB 종속적인 부분을 자동으로 변경시켜줌
+					
+				3. 해결책
+					- 방언처리기 제공(Dialect)
+					- 각 DB별 Class가 다름
+				
+				 
+			-->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<!-- 개발 시 개발 server / test시 test server / 운영용 server로 분리
+			1. 필수: 절대 존재하는 데이터를 휘발시켜서는 안 됨
+			2. 개발시 자동으로 table 생성, 데이터 저장, 수정, 삭제시 주의 필수
+				- 설정값으로 table 삭제 금지, 유지시키는 기술 사용
+				- value="update": table 존재시 유지, table 미 존재시 생성
+				- value="create": ''무조건'' table 새로 생성
+					-> 운영 서버에선 value="create" 사용에 메우 주의해야 함
+				- 참고
+					26.01.28 기준으로 chatGPT 제공 예제에선 value="update"로 제공함
+					
+			<property name="hibernate.format_sql" value="true" />
+			<!-- 콘솔창에 출력되는 sql 문장 가독성 향상시키는 옵션, sql 문장이 한 줄로 출력됨 -->
+			
+		</properties>
+	</persistence-unit>
+	 

@@ -1,0 +1,59 @@
+
+[1] 전제 조건
+- 이미 table이 존재하고 있음
+- id값은 auto_increment, id값을 임의로 넣을 수 없음(이름만 저장)
+
+
+
+1.  insert: 저장 완료
+
+	Member m1 = new Member();
+    m1.setName("연아");
+    em.persist(m1);
+	tx.commit();
+
+2.  insert -> update: 재석이란 이름으로 저장 및 수정 완료
+
+	Member m1 = new Member();
+    m1.setName("연아");
+    em.persist(m1);
+    m1.setName("재석"); // 추가
+	tx.commit();
+
+3.  insert 문장은 콘솔에 출력되나 저장 불가
+
+	Member m1 = new Member();
+    m1.setName("연아");
+    em.persist(m1);
+    m1.setName("재석");
+//	tx.commit();
+
+	- insert문장 생성, update문장 없음
+	- 효율성 관점: 어차피 저장 안 될 문장인데 수정은 왜 하는가?
+		: 저장, 수정, 영구저장 다 JPA가 파악
+
+***
+Q1) insert 문장과 연계된 코드?
+	persist() -> commit()
+	
+Q2) update 문장과 연계된 코드?
+	set~~() -> commit(). 한 코드 내에 넣어놓을 경우 insert를 바꾸지, update가 이뤄지진 않음
+	
+Q3) 실제 DB에 반영되는 시점은 어떤 코드 영역에서?
+	commit()
+	
+Q4) 내부 실행 프로세스 이해를 위해 메모리 관점에서 고민해보기
+	JDBC로 개발시: JVM 기본 메모리 <-> RDBMS(임시 메모리 -> commit -> 영구 메모리)
+	JPA로 개발시:
+		JVM 기본 메모리 <-> Persistance Context 영역 <-> RDBMS(임시 메모리 -> commit -> 영구 메모리)
+
+______________________
+
+
+[2] Persistance Context
+1. 기능
+	- 고유 id로 객체 구분
+	- sql 문장 DB에 실행
+	- 스냅샷 기능으로 동일한지, 수정되었는지 감지
+	...
+	

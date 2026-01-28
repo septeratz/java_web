@@ -1,0 +1,13 @@
+미션
+
+1. RDBMS - Mysql
+2. Customer entity명
+	- 멤버 변수명
+		- custId / custName / custGrade
+		
+3. 생성되는 table명과 컬럼명
+	table명: customer
+	컬럼명: cust_id / cust_name / cust_grade
+	
+4. crud 로직 구현, test
+- 기술세미나장에게 승인받기?
